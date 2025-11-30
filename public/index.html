@@ -5,6 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rideau Canal Ice Monitoring Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 </head>
@@ -13,112 +16,327 @@
     <div class="container">
         <!-- Header -->
         <header class="header">
-            <div class="header-content">
-                <h1>🏒 Rideau Canal Skateway</h1>
-                <h2>Real-time Ice Monitoring System</h2>
-                <div class="status-badge" id="overallStatus">
-                    <span class="status-text">Loading...</span>
+            <div class="header-left">
+                <div class="logo">
+                    <span class="logo-icon">❄️</span>
+                    <div class="logo-text">
+                        <h1>Rideau Canal Skateway</h1>
+                        <p>Real-time Ice Monitoring System</p>
+                    </div>
                 </div>
             </div>
-            <div class="last-update">
-                Last updated: <span id="lastUpdate">--:--:--</span>
+            <div class="header-right">
+                <div class="status-badge" id="overallStatus">
+                    <span class="status-dot"></span>
+                    <span class="status-text">Loading...</span>
+                </div>
+                <div class="last-update">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <span id="lastUpdate">--:--:--</span>
+                </div>
             </div>
         </header>
 
-        <!-- Location Cards -->
-        <div class="locations-grid">
-            <!-- Dow's Lake -->
-            <div class="location-card" data-location="Dow's Lake">
-                <div class="card-header">
-                    <h3>📍 Dow's Lake</h3>
-                    <span class="safety-badge" id="status-dows">--</span>
-                </div>
-                <div class="metrics">
-                    <div class="metric">
-                        <span class="metric-label">Ice Thickness</span>
-                        <span class="metric-value" id="ice-dows">--</span>
-                        <span class="metric-unit">cm</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Surface Temp</span>
-                        <span class="metric-value" id="temp-dows">--</span>
-                        <span class="metric-unit">°C</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Snow</span>
-                        <span class="metric-value" id="snow-dows">--</span>
-                        <span class="metric-unit">cm</span>
-                    </div>
-                </div>
+        <!-- Stats Overview -->
+        <div class="stats-overview">
+            <div class="stat-item">
+                <span class="stat-label">Monitoring Stations</span>
+                <span class="stat-value">3</span>
             </div>
-
-            <!-- Fifth Avenue -->
-            <div class="location-card" data-location="Fifth Avenue">
-                <div class="card-header">
-                    <h3>📍 Fifth Avenue</h3>
-                    <span class="safety-badge" id="status-fifth">--</span>
-                </div>
-                <div class="metrics">
-                    <div class="metric">
-                        <span class="metric-label">Ice Thickness</span>
-                        <span class="metric-value" id="ice-fifth">--</span>
-                        <span class="metric-unit">cm</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Surface Temp</span>
-                        <span class="metric-value" id="temp-fifth">--</span>
-                        <span class="metric-unit">°C</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Snow</span>
-                        <span class="metric-value" id="snow-fifth">--</span>
-                        <span class="metric-unit">cm</span>
-                    </div>
-                </div>
+            <div class="stat-item">
+                <span class="stat-label">Update Interval</span>
+                <span class="stat-value">5 min</span>
             </div>
-
-            <!-- NAC -->
-            <div class="location-card" data-location="NAC">
-                <div class="card-header">
-                    <h3>📍 NAC</h3>
-                    <span class="safety-badge" id="status-nac">--</span>
-                </div>
-                <div class="metrics">
-                    <div class="metric">
-                        <span class="metric-label">Ice Thickness</span>
-                        <span class="metric-value" id="ice-nac">--</span>
-                        <span class="metric-unit">cm</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Surface Temp</span>
-                        <span class="metric-value" id="temp-nac">--</span>
-                        <span class="metric-unit">°C</span>
-                    </div>
-                    <div class="metric">
-                        <span class="metric-label">Snow</span>
-                        <span class="metric-value" id="snow-nac">--</span>
-                        <span class="metric-unit">cm</span>
-                    </div>
-                </div>
+            <div class="stat-item">
+                <span class="stat-label">Canal Length</span>
+                <span class="stat-value">7.8 km</span>
             </div>
         </div>
+
+        <!-- Location Cards -->
+        <section class="section">
+            <h2 class="section-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                    <circle cx="12" cy="10" r="3"></circle>
+                </svg>
+                Monitoring Stations
+            </h2>
+            <div class="locations-grid">
+                <!-- Dow's Lake -->
+                <div class="location-card" data-location="Dow's Lake">
+                    <div class="card-header">
+                        <div class="location-info">
+                            <span class="location-icon">🏔️</span>
+                            <h3>Dow's Lake</h3>
+                        </div>
+                        <span class="safety-badge" id="status-dows">--</span>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="metric-icon ice">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M2 12h20M12 2v20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"></path>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Ice Thickness</span>
+                                <div class="metric-value-wrapper">
+                                    <span class="metric-value" id="ice-dows">--</span>
+                                    <span class="metric-unit">cm</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-icon temp">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Surface Temp</span>
+                                <div class="metric-value-wrapper">
+                                    <span class="metric-value" id="temp-dows">--</span>
+                                    <span class="metric-unit">°C</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-icon snow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"></path>
+                                    <line x1="8" y1="16" x2="8.01" y2="16"></line>
+                                    <line x1="8" y1="20" x2="8.01" y2="20"></line>
+                                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                    <line x1="12" y1="22" x2="12.01" y2="22"></line>
+                                    <line x1="16" y1="16" x2="16.01" y2="16"></line>
+                                    <line x1="16" y1="20" x2="16.01" y2="20"></line>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Snow Accumulation</span>
+                                <div class="metric-value-wrapper">
+                                    <span class="metric-value" id="snow-dows">--</span>
+                                    <span class="metric-unit">cm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fifth Avenue -->
+                <div class="location-card" data-location="Fifth Avenue">
+                    <div class="card-header">
+                        <div class="location-info">
+                            <span class="location-icon">🌉</span>
+                            <h3>Fifth Avenue</h3>
+                        </div>
+                        <span class="safety-badge" id="status-fifth">--</span>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="metric-icon ice">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M2 12h20M12 2v20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"></path>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Ice Thickness</span>
+                                <div class="metric-value-wrapper">
+                                    <span class="metric-value" id="ice-fifth">--</span>
+                                    <span class="metric-unit">cm</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-icon temp">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Surface Temp</span>
+                                <div class="metric-value-wrapper">
+                                    <span class="metric-value" id="temp-fifth">--</span>
+                                    <span class="metric-unit">°C</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-icon snow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"></path>
+                                    <line x1="8" y1="16" x2="8.01" y2="16"></line>
+                                    <line x1="8" y1="20" x2="8.01" y2="20"></line>
+                                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                    <line x1="12" y1="22" x2="12.01" y2="22"></line>
+                                    <line x1="16" y1="16" x2="16.01" y2="16"></line>
+                                    <line x1="16" y1="20" x2="16.01" y2="20"></line>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Snow Accumulation</span>
+                                <div class="metric-value-wrapper">
+                                    <span class="metric-value" id="snow-fifth">--</span>
+                                    <span class="metric-unit">cm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- NAC -->
+                <div class="location-card" data-location="NAC">
+                    <div class="card-header">
+                        <div class="location-info">
+                            <span class="location-icon">🎭</span>
+                            <h3>NAC (Arts Centre)</h3>
+                        </div>
+                        <span class="safety-badge" id="status-nac">--</span>
+                    </div>
+                    <div class="metrics">
+                        <div class="metric">
+                            <div class="metric-icon ice">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M2 12h20M12 2v20M4.93 4.93l14.14 14.14M19.07 4.93L4.93 19.07"></path>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Ice Thickness</span>
+                                <div class="metric-value-wrapper">
+                                    <span class="metric-value" id="ice-nac">--</span>
+                                    <span class="metric-unit">cm</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-icon temp">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"></path>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Surface Temp</span>
+                                <div class="metric-value-wrapper">
+                                    <span class="metric-value" id="temp-nac">--</span>
+                                    <span class="metric-unit">°C</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-icon snow">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                    fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 17.58A5 5 0 0 0 18 8h-1.26A8 8 0 1 0 4 16.25"></path>
+                                    <line x1="8" y1="16" x2="8.01" y2="16"></line>
+                                    <line x1="8" y1="20" x2="8.01" y2="20"></line>
+                                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
+                                    <line x1="12" y1="22" x2="12.01" y2="22"></line>
+                                    <line x1="16" y1="16" x2="16.01" y2="16"></line>
+                                    <line x1="16" y1="20" x2="16.01" y2="20"></line>
+                                </svg>
+                            </div>
+                            <div class="metric-content">
+                                <span class="metric-label">Snow Accumulation</span>
+                                <div class="metric-value-wrapper">
+                                    <span class="metric-value" id="snow-nac">--</span>
+                                    <span class="metric-unit">cm</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
         <!-- Charts Section -->
-        <div class="charts-section">
-            <div class="chart-container">
-                <h3>Ice Thickness Trend (Last Hour)</h3>
-                <canvas id="iceThicknessChart"></canvas>
+        <section class="section">
+            <h2 class="section-title">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="20" x2="18" y2="10"></line>
+                    <line x1="12" y1="20" x2="12" y2="4"></line>
+                    <line x1="6" y1="20" x2="6" y2="14"></line>
+                </svg>
+                Historical Trends
+            </h2>
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Ice Thickness</h3>
+                        <span class="chart-subtitle">Last Hour</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="iceThicknessChart"></canvas>
+                    </div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-header">
+                        <h3>Surface Temperature</h3>
+                        <span class="chart-subtitle">Last Hour</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="temperatureChart"></canvas>
+                    </div>
+                </div>
             </div>
-            <div class="chart-container">
-                <h3>Temperature Trend (Last Hour)</h3>
-                <canvas id="temperatureChart"></canvas>
+        </section>
+
+        <!-- Safety Legend -->
+        <section class="section">
+            <div class="safety-legend">
+                <h3>Safety Status Guide</h3>
+                <div class="legend-items">
+                    <div class="legend-item">
+                        <span class="legend-dot safe"></span>
+                        <div class="legend-content">
+                            <strong>Safe</strong>
+                            <p>Ice ≥ 30cm & Temp ≤ -2°C</p>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot caution"></span>
+                        <div class="legend-content">
+                            <strong>Caution</strong>
+                            <p>Ice ≥ 25cm & Temp ≤ 0°C</p>
+                        </div>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-dot unsafe"></span>
+                        <div class="legend-content">
+                            <strong>Unsafe</strong>
+                            <p>All other conditions</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
+        </section>
 
         <!-- Footer -->
         <footer class="footer">
-            <p>National Capital Commission (NCC) - Real-time Monitoring System</p>
-            <p>Data refreshes every 30 seconds | CST8916 Final Project</p>
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <span>❄️</span>
+                    <span>Rideau Canal Monitoring System</span>
+                </div>
+                <div class="footer-info">
+                    <p>National Capital Commission (NCC)</p>
+                    <p>Data refreshes every 30 seconds • CST8916 Final Project</p>
+                </div>
+            </div>
         </footer>
     </div>
 
